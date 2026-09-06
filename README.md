@@ -32,3 +32,18 @@ Debugging the CSS sizing issue myself, and building a working drag-and-drop wind
 ## Built with
 
 HTML, CSS, JavaScript — no frameworks or libraries.
+
+##CHANGES:
+
+SpaceFeed (Start App)
+
+The Start app now shows a live space news feed instead of static content.
+
+Features:
+
+Fetches real, up-to-date space news articles from the Spaceflight News API
+Like any post — your likes are saved and persist even after refreshing
+Comment on any post — comments are saved locally and stick around after reload
+Falls back gracefully with a friendly message if the news can't be loaded (e.g., no internet)
+
+Note: Likes and comments are stored locally in your browser (not shared between users) — each visitor sees their own likes/comments only.
