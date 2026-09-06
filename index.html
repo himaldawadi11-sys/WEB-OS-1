@@ -1,85 +1,100 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <title>SpaceYatri OS!</title>
-
 <link rel="stylesheet" href="style.css">
-
-
 </head>
-
 <body>
+    
 
 <div class="welcome">
-
-<h1>SpaceYatri's OS</h1>
-
-<h2>Welcome</h2>
-<h3>Stranger and Explorer!</h3>
-
-<p class="motto">A web-based operating system built by SpaceYatri as a initiative.</p>
+  <h1>SpaceYatri's OS</h1>
 
 
-<Button onclick="launchOs()">Launch Yatri OS</Button>
+  <h2>Welcome</h2>
 
+  <h3>Stranger and Explorer!</h3>
+
+  <p class="motto">A web-based operating system built by SpaceYatri as a initiative.</p>
+
+  <Button onclick="launchOs()">Launch Yatri OS</Button>
 
 
 </div>
-
 
 <div class="Desktop" style="display : none;">
 
-<div class="TopBar">
 
-    <p class="os-name" id="os-name">Yatri Os</p>
-    <p class="slogan">Exploring beyond!</p>
-    <p id="timeElement" class="time"> </p>
-</div>
+  <div class="TopBar">
+      <p class="os-name" id="os-name">Yatri Os</p>
 
-<div class="window" id="window">
-    <p id="windowheader">Drag</p>
-
-<p id="windowclose" style="cursor: pointer;">Close</p>
+      <p class="slogan">Exploring beyond!</p>
 
 
+      <p id="timeElement" class="time"> </p>
 
-</div>
+  </div>
 
-<div id="desktopapps">
-  <div id="start">
-    <img src="icon.png">
-    <p>Start</p>
+  <div class="window" id="window">
+
+      <p id="windowheader">Drag</p>
+
+      <p id="windowclose" style="cursor: pointer;">Close</p>
+
+
+  </div>
+
+
+  <div id="desktopapps">
+    <div id="start">
+      <img src="icon.png">
+
+      <p>Start</p>
+    </div>
+
+    <div id="aboutIcon">
+
+      <img src="SPACEYATRI.png">
+      <p>About Me</p>
+    </div>
+  </div>
+
+
+  <div class="window" id="spacenews">
+      <div class="windowheader" id="spacenewsheader">
+          <p class="headertext">Trending!</p>
+
+
+          <div class="closebutton" id="spacenewsclose"></div>
+      </div>
+
+      <div class="newsbody">
+          <h4 class="newstitle">NASA's Roman Space Telescope Launches!</h4>
+          <p class="newsdate">08/30/2026</p>
+          <p class="newscontent">NASA's newest space telescope has launched on a quest to explore the hidden universe, lifting off aboard a SpaceX Falcon Heavy rocket from Kennedy Space Center in Florida. The mission is the Nancy Grace Roman Space Telescope, a NASA flagship designed to map the universe on a scale far larger than any previous observatory. Its powerful 300-megapixel camera can capture regions of sky about 100 times larger than Hubble's field of view, while keeping comparable image sharpness. Scientists hope Roman will help uncover secrets of dark energy, dark matter, and distant exoplanets in the years ahead.</p>
+      </div>
+  </div>
+
+
+
+  <div class="window" id="about">
+      <div class="windowheader" id="aboutheader">
+          <p class="text">About Me</p>
+          <div class="closebutton" id="aboutclose"></div>
+      </div>
+      <div class="aboutbody">
+          <h4 class="abouttitle">Space Yatri</h4>
+          <p class="content">
+Hey, I'm SpaceYatri — a student and explorer with a love for space and code.This site is my little corner of the internet. A fake operating system built from scratch to reflect who I am: a mix of curiosity, creativity, and a constant hunger to explore beyond."
+
+          </p>
+
+      </div>
   </div>
 
 </div>
 
-
-<div class="window" id="spacenews">
-    <div class="windowheader" id="spacenewsheader">
-        <p class="headertext" >Trending!</p>
-        <div class="closebutton" id="spacenewsclose"></div>
-    </div>
-
-
-
-
-
-<div class="newsbody">
-        <h4 class="newstitle">NASA's Roman Space Telescope Launches!</h4>
-        <p class="newsdate">08/30/2026</p>
-        <p class="newscontent">NASA's newest space telescope has launched on a quest to explore the hidden universe, lifting off aboard a SpaceX Falcon Heavy rocket from Kennedy Space Center in Florida. The mission is the Nancy Grace Roman Space Telescope, a NASA flagship designed to map the universe on a scale far larger than any previous observatory. Its powerful 300-megapixel camera can capture regions of sky about 100 times larger than Hubble's field of view, while keeping comparable image sharpness. Scientists hope Roman will help uncover secrets of dark energy, dark matter, and distant exoplanets in the years ahead.</p>
-    </div>
-</div>
-
-
-
-
-
-
-
-</div>
-</div>
 <script src="script.js"></script>
 </body>
-</html>
+
+</html>                    
