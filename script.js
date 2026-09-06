@@ -112,3 +112,102 @@ document.addEventListener("keydown", function(e) {
 
   
 });
+
+
+let spacePosts = [];
+
+let userData = JSON.parse(localStorage.getItem("spaceUserData")) || {};
+
+function saveUserData() {
+  localStorage.setItem("spaceUserData", JSON.stringify(userData));
+}
+
+async function fetchSpaceNews() {
+  try {
+    const response = await fetch("https://api.spaceflightnewsapi.net/v4/articles/?limit=10");
+    const data = await response.json();
+
+    spacePosts = data.results.map(article => {
+      const saved = userData[article.id] || { likes: 0, liked: false, comments: [] };
+      return {
+        id: article.id,
+        title: article.title,
+        date: new Date(article.published_at).toLocaleDateString(),
+        content: article.summary,
+        image: article.image_url,
+        url: article.url,
+        likes: saved.likes,
+        liked: saved.liked,
+        comments: saved.comments
+      };
+    });
+
+    renderFeed(); 
+  } catch (error) {
+    document.querySelector("#feedContainer").innerHTML = "<p>Couldn't load space news right now. Try again later!</p>";
+    console.error("News fetch failed:", error);
+  }
+}
+
+fetchSpaceNews();
+
+
+function renderFeed() {
+  const container = document.querySelector("#feedContainer");
+  container.innerHTML = "";
+
+  spacePosts.forEach(post => {
+    const postDiv = document.createElement("div");
+    postDiv.className = "feedpost";
+
+    postDiv.innerHTML = `
+      <p class="feedheading">What's happening in space?</p>
+      ${post.image ? `<img src="${post.image}" class="postimage">` : ""}
+      <h4 class="newstitle">${post.title}</h4>
+      <p class="newsdate">${post.date}</p>
+      <p class="newscontent">${post.content}</p>
+      <div class="postactions">
+        <button class="likebtn" data-id="${post.id}">${post.liked ? "❤️" : "🤍"} ${post.likes}</button>
+      </div>
+      <div class="comments" id="comments-${post.id}">
+        ${post.comments.map(c => `<p class="comment">💬 ${c}</p>`).join("")}
+      </div>
+      <div class="addcomment">
+        <input type="text" placeholder="Add a comment..." id="commentInput-${post.id}">
+        <button class="commentbtn" data-id="${post.id}">Send</button>
+      </div>
+    `;
+
+    container.appendChild(postDiv);
+  });
+
+  attachFeedListeners();
+}
+
+function attachFeedListeners() {
+  document.querySelectorAll(".likebtn").forEach(btn => {
+    btn.addEventListener("click", function() {
+      const id = this.dataset.id;
+      const post = spacePosts.find(p => p.id == id);
+      post.liked = !post.liked;
+      post.likes += post.liked ? 1 : -1;
+      userData[id] = { likes: post.likes, liked: post.liked, comments: post.comments };
+      saveUserData();
+      renderFeed();
+    });
+  });
+
+  document.querySelectorAll(".commentbtn").forEach(btn => {
+    btn.addEventListener("click", function() {
+      const id = this.dataset.id;
+      const input = document.querySelector(`#commentInput-${id}`);
+      if (input.value.trim() === "") return;
+
+      const post = spacePosts.find(p => p.id == id);
+      post.comments.push(input.value.trim());
+      userData[id] = { likes: post.likes, liked: post.liked, comments: post.comments };
+      saveUserData();
+      renderFeed();
+    });
+  });
+}
