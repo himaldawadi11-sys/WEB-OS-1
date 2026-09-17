@@ -1,98 +1,285 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>SpaceYatri OS!</title>
-<link rel="stylesheet" href="style.css">
+  <title>SpaceYatri OS!</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
 
-<div class="welcome">
-  <h1>SpaceYatri's OS</h1>
+  <!-- boot sequence -->
+  <div id="bootScreen">
+    <div class="boot-stars"></div>
+
+    <!-- phase 1 - ignition -->
+    <div class="boot-phase" id="phaseIgnition">
+      <p class="boot-logo">// SPACEYATRI OS</p>
+      <p class="boot-status" id="bootStatus">SYSTEMS STANDBY...</p>
+      <p class="ignition-count" id="ignitionCount"></p>
+    </div>
+
+    <!-- phase 2 - launch -->
+    <div class="boot-phase" id="phaseLaunch">
+      <div class="launch-stage">
+        <div class="rocket" id="rocket">
+          <div class="rocket-body">
+            <div class="rocket-window"></div>
+          </div>
+          <div class="rocket-fin fin-left"></div>
+          <div class="rocket-fin fin-right"></div>
+          <div class="rocket-flame" id="rocketFlame"></div>
+        </div>
+
+        <div class="smoke-field" id="smokeField"></div>
+        <div class="launch-pad"></div>
+      </div>
+
+      <p class="boot-status" id="launchStatus">LIFTOFF</p>
+    </div>
+
+    <!-- phase 3 - welcome text -->
+    <div class="boot-phase" id="phaseWelcome">
+      <p class="welcome-text" id="welcomeText">WELCOME ONBOARD</p>
+      <p class="boot-logo welcome-logo" id="welcomeLogo">// SPACEYATRI OS</p>
+    </div>
+  </div>
 
 
-  <h2>Welcome</h2>
+  <!-- main desktop -->
+  <div class="Desktop">
 
-  <h3>Stranger and Explorer!</h3>
-
-  <p class="motto">A web-based operating system built by SpaceYatri as a initiative.</p>
-
-  <Button onclick="launchOs()">Launch Yatri OS</Button>
-
-
-</div>
-
-<div class="Desktop" style="display : none;">
-
-
-  <div class="TopBar">
+    <div class="TopBar">
       <p class="os-name" id="os-name">Yatri Os</p>
-
       <p class="slogan">Exploring beyond!</p>
 
+      <div class="topbar-icons">
 
-      <p id="timeElement" class="time"> </p>
+        <!-- brightness control -->
+        <div class="topbar-icon" id="brightnessIcon" title="Brightness">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="4"></circle>
+            <line x1="12" y1="2" x2="12" y2="4"></line>
+            <line x1="12" y1="20" x2="12" y2="22"></line>
+            <line x1="4.2" y1="4.2" x2="5.6" y2="5.6"></line>
+            <line x1="18.4" y1="18.4" x2="19.8" y2="19.8"></line>
+            <line x1="2" y1="12" x2="4" y2="12"></line>
+            <line x1="20" y1="12" x2="22" y2="12"></line>
+            <line x1="4.2" y1="19.8" x2="5.6" y2="18.4"></line>
+            <line x1="18.4" y1="5.6" x2="19.8" y2="4.2"></line>
+          </svg>
 
-  </div>
+          <div class="brightness-popup" id="brightnessPopup">
+            <input type="range" id="topbarBrightnessSlider" min="30" max="150" value="100">
+          </div>
+        </div>
 
-  <div class="window" id="window">
+        <!-- wifi / signal -->
+        <div class="topbar-icon" id="wifiIcon" title="Wifi">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M2 8.5C7.5 3.5 16.5 3.5 22 8.5"></path>
+            <path d="M5.5 12C9 9 15 9 18.5 12"></path>
+            <path d="M9 15.5C10.8 14 13.2 14 15 15.5"></path>
+            <circle cx="12" cy="19" r="1.2" fill="currentColor" stroke="none"></circle>
+          </svg>
 
-      <p id="windowheader">Drag</p>
+          <div class="wifi-popup" id="wifiPopup">
+            <p class="wifi-title">SIGNAL</p>
 
-      <p id="windowclose" style="cursor: pointer;">Close</p>
+            <div class="wifi-item connected">
+              <span>EARTH</span>
+              <span class="wifi-check">✓</span>
+            </div>
 
+            <div class="wifi-item">
+              <span>MARS</span>
+              <span class="wifi-note">PAIRING...</span>
+            </div>
 
-  </div>
+            <div class="wifi-item">
+              <span>JUPITER</span>
+              <span class="wifi-note">TOO FAR</span>
+            </div>
 
+            <div class="wifi-item">
+              <span>SATURN</span>
+              <span class="wifi-note">OUT OF RANGE</span>
+            </div>
 
-  <div id="desktopapps">
-    <div id="start">
-      <img src="icon.png">
+            <div class="wifi-item">
+              <span>PLUTO</span>
+              <span class="wifi-note">UNKNOWN</span>
+            </div>
+          </div>
+        </div>
 
-      <p>Start</p>
-    </div>
+        <!-- fuel gauge -->
+        <div class="fuel-mini" id="fuelMini">
+          <div class="fuel-mini-outer">
+            <div class="fuel-mini-inner" id="fuelMiniInner"></div>
+          </div>
+          <div class="fuel-tooltip" id="fuelTooltip">100% Fuel</div>
+        </div>
 
-    <div id="aboutIcon">
-
-      <img src="SPACEYATRI.png">
-      <p>About Me</p>
-    </div>
-  </div>
-
-
-  <div class="window" id="spacenews">
-    <div class="windowheader" id="spacenewsheader">
-        <p class="headertext">SpaceFeed</p>
-        <div class="closebutton" id="spacenewsclose"></div>
-    </div>
-
-    <div class="newsbody" id="feedContainer">
-      
-    </div>
-
-    
-</div>
-
-
-
-  <div class="window" id="about">
-      <div class="windowheader" id="aboutheader">
-          <p class="text">About Me</p>
-          <div class="closebutton" id="aboutclose"></div>
+        <p id="timeElement" class="time"></p>
       </div>
-      <div class="aboutbody">
-          <h4 class="abouttitle">Space Yatri</h4>
-          <p class="content">
-Hey, I'm SpaceYatri — a student and explorer with a love for space and code.This site is my little corner of the internet. A fake operating system built from scratch to reflect who I am: a mix of curiosity, creativity, and a constant hunger to explore beyond."
+    </div>
 
-          </p>
-
+    <div id="desktopapps">
+      <div id="settingsIcon" class="desktop-icon">
+        <img src="DECK.png" class="icon-img" alt="DECK">
+        <div>DECK</div>
       </div>
+
+      <div id="calculatorIcon" class="desktop-icon">
+        <img src="calc-256x256.webp" class="icon-img" alt="Calculator">
+        <div>CALC</div>
+      </div>
+    </div>
+
+    <div id="clockWidget">
+      <div class="rocket-body-static">
+
+        <div class="clock-face">
+          <div class="tick tick-12"></div>
+          <div class="tick tick-3"></div>
+          <div class="tick tick-6"></div>
+          <div class="tick tick-9"></div>
+
+          <div class="clock-hand hour-hand" id="hourHand"></div>
+          <div class="clock-hand minute-hand" id="minuteHand"></div>
+          <div class="clock-center"></div>
+        </div>
+
+        <div class="digital-readout" id="digitalTime">00:00:00 PM</div>
+      </div>
+    </div>
+
+    <!-- terminal window, empty for now -->
+    <div class="window" id="window">
+      <div class="windowheader" id="windowheader">
+        <p class="headertext">Terminal</p>
+        <div class="window-controls">
+          <div class="closebutton" id="windowclose">✕</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- settings -->
+    <div class="window" id="settings">
+
+      <div class="windowheader" id="settingsheader">
+        <p class="headertext">Settings</p>
+        <div class="window-controls">
+          <div class="controlbutton minbutton" id="settingsmin">–</div>
+          <div class="closebutton" id="settingsclose">✕</div>
+        </div>
+      </div>
+
+      <div class="settings-main">
+
+        <div class="settings-sidebar">
+          <input type="text" id="settingsSearch" placeholder="Search...">
+
+          <div class="settings-navitem active" data-target="personalization-panel">Personalization</div>
+          <div class="settings-navitem" data-target="sound-panel">Sound</div>
+          <div class="settings-navitem" data-target="display-panel">Display</div>
+        </div>
+
+        <div class="settings-content">
+
+          <div class="settings-panel" id="personalization-panel">
+            <h4>Personalization</h4>
+
+            <p>Wallpaper</p>
+            <div class="wallpaper-options">
+              <img src="Wallpaper1(320180).png" class="wallpaper-thumb" data-wallpaper="Wallpaper1org.png" alt="Wallpaper 1">
+              <img src="Wallpaper2(320180).jpg" class="wallpaper-thumb" data-wallpaper="Wallpaper2org.png" alt="Wallpaper 2">
+              <img src="Wallpaper3org (320180).jpg" class="wallpaper-thumb" data-wallpaper="Wallpaper3org.jpg" alt="Wallpaper 3">
+              <img src="Wallpaper4org (320180).jpg" class="wallpaper-thumb" data-wallpaper="Wallpaper4org.jpg" alt="Wallpaper 4">
+            </div>
+
+            <p>Theme</p>
+            <button id="themeToggle">Toggle Dark/Light</button>
+
+            <p>Accent Color</p>
+            <div class="accent-options">
+              <div class="accent-swatch" style="background:#ffb066;" data-accent="#ffb066"></div>
+              <div class="accent-swatch" style="background:#00e5ff;" data-accent="#00e5ff"></div>
+              <div class="accent-swatch" style="background:#ff5a3c;" data-accent="#ff5a3c"></div>
+              <div class="accent-swatch" style="background:#7fff9e;" data-accent="#7fff9e"></div>
+              <div class="accent-swatch" style="background:#b967ff;" data-accent="#b967ff"></div>
+            </div>
+          </div>
+
+          <div class="settings-panel" id="sound-panel" style="display:none;">
+            <h4>Sound</h4>
+
+            <p>Master Volume</p>
+            <input type="range" id="volumeSlider" min="0" max="100" value="50">
+
+            <p>System Sounds</p>
+            <button id="muteToggle">Mute: Off</button>
+          </div>
+
+          <div class="settings-panel" id="display-panel" style="display:none;">
+            <h4>Display</h4>
+
+            <p>Brightness</p>
+            <input type="range" id="brightnessSlider" min="30" max="150" value="100">
+
+            <p>Window Transparency</p>
+            <input type="range" id="transparencySlider" min="40" max="100" value="90">
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- calculator app -->
+    <div class="window" id="calculator">
+
+      <div class="windowheader" id="calculatorheader">
+        <p class="headertext">CALC</p>
+        <div class="window-controls">
+          <div class="controlbutton minbutton" id="calculatormin">-</div>
+          <div class="closebutton" id="calculatorclose">✕</div>
+        </div>
+      </div>
+
+      <div class="calc-body">
+        <input type="text" id="calcDisplay" readonly value="0">
+
+        <div class="calc-grid">
+          <button class="calc-btn calc-op" data-action="clear">C</button>
+          <button class="calc-btn calc-op" data-action="backspace">⌫</button>
+          <button class="calc-btn calc-op" data-value="/">/</button>
+          <button class="calc-btn calc-op" data-value="*">×</button>
+
+          <button class="calc-btn" data-value="7">7</button>
+          <button class="calc-btn" data-value="8">8</button>
+          <button class="calc-btn" data-value="9">9</button>
+          <button class="calc-btn calc-op" data-value="-">−</button>
+
+          <button class="calc-btn" data-value="4">4</button>
+          <button class="calc-btn" data-value="5">5</button>
+          <button class="calc-btn" data-value="6">6</button>
+          <button class="calc-btn calc-op" data-value="+">+</button>
+
+          <button class="calc-btn" data-value="1">1</button>
+          <button class="calc-btn" data-value="2">2</button>
+          <button class="calc-btn" data-value="3">3</button>
+          <button class="calc-btn calc-equals" data-action="equals" style="grid-row: span 2;">=</button>
+
+          <button class="calc-btn" data-value="0" style="grid-column: span 2;">0</button>
+          <button class="calc-btn" data-value=".">.</button>
+        </div>
+      </div>
+    </div>
+
+    <img id="alienBuddy" src="imresizer-resize64.png" alt="Alien Buddy">
+
+    <div id="toastContainer"></div>
   </div>
 
-</div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
-
-</html>                    
+</html>
